@@ -1,6 +1,7 @@
 ﻿using Bulky.DataAccess.Data;
 using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
+using Bulky.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -10,66 +11,85 @@ namespace BulkyWeb.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(IUnitOfWork unitOfWork)
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u=> new SelectListItem
-            {
-                Text = u.Name,
-                Value = u.Id.ToString()
-                
-            });
+
             return View(objProductList);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(Product obj)
-        {
-            if (ModelState.IsValid)
+            //ViewBag.CategoryList = CategoryList;
+            ProductVM productVM = new()
             {
-                _unitOfWork.Product.Add(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Category Create successfully";
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
+                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
 
-        public IActionResult Edit(int? id)
-        {
+                }),
+                Product = new Product()
+            };
             if (id == null || id == 0)
             {
-                return NotFound();
+                return View(productVM);
             }
-            Product productFromDb = _unitOfWork.Product.Get(u => u.Id == id);
-            if (productFromDb == null)
+            else
             {
-                return NotFound();
+                productVM.Product = _unitOfWork.Product.Get(u=>u.Id==id);
+                return View(productVM);
             }
-            return View(productFromDb);
+
+
         }
         [HttpPost]
-        public IActionResult Edit(Product obj)
+        public IActionResult Upsert(ProductVM productVM, IFormFile? file)
         {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Product.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Category Update successfully";
+          
+                if (ModelState.IsValid)
+                {
+                string wwwRothPath = _webHostEnvironment.WebRootPath;
+                if (file != null && file.Length > 0)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRothPath, @"images\product");
 
-                return RedirectToAction("Index");
-            }
-            return View();
+                    if (!Directory.Exists(productPath))
+                    {
+                        Directory.CreateDirectory(productPath);
+                    }
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    productVM.Product.ImageUrl = @"\images\product\" + fileName;
+                }
+                _unitOfWork.Product.Add(productVM.Product);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Category Create successfully";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id.ToString()
+
+                    });
+                    return View(productVM);
+                }          
         }
+
+
 
 
         public IActionResult Delete(int? id)
