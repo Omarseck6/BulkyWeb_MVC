@@ -1,107 +1,109 @@
 # BulkyBookWeb
 
-BulkyBookWeb est une application web de gestion de livres permettant la gestion des livres via une interface administrateur et la consultation des livres via une interface client. Ce projet est conçu pour fournir une solution complète pour la gestion et la consultation de livres.
+BulkyBookWeb is a web application for book management, featuring an admin interface for managing books and a customer interface for browsing them. This project aims to provide a complete solution for book management and consultation.
 
-## Fonctionnalités
+## Features
 
-### Partie Administrateur
-- Ajouter de nouveaux livres.
-- Mettre à jour les informations des livres existants.
-- Supprimer des livres.
-- Gérer les catégories et auteurs des livres.
+### Admin Interface
+- Add new books.
+- Update existing book information.
+- Delete books.
+- Manage book categories and authors.
 
-### Partie Client
-- Consulter les livres disponibles.
-- Rechercher des livres par titre, auteur ou catégorie.
+### Customer Interface
+- Browse available books.
+- Search books by title, author, or category.
 
-## Technologies utilisées
+## Technologies Used
 
-- **Backend** :
+- **Backend**:
   - .NET Core
   - C#
   - Entity Framework (EF)
   - LINQ
-- **Frontend** :
+- **Frontend**:
   - Angular
   - JavaScript
   - HTML & CSS
   - Bootstrap
-- **Base de données** :
+- **Database**:
   - Microsoft SQL Server
-- **Environnement de développement** :
+- **Development Environment**:
   - Microsoft Visual Studio
   - GitHub
   - Git
 
-## Prérequis
+## Prerequisites
 
-- [.NET SDK](https://dotnet.microsoft.com/download) version 6.0 ou supérieure.
-- [Node.js](https://nodejs.org/) et npm pour Angular.
+- [.NET SDK](https://dotnet.microsoft.com/download) version 6.0 or later.
+- [Node.js](https://nodejs.org/) and npm for Angular.
 - Microsoft SQL Server.
-- Visual Studio 2022 ou supérieur.
+- Visual Studio 2022 or later.
 
 ## Installation
 
-1. Clonez le repository :
+1. Clone the repository:
    ```bash
-   git clone https://github.com/votre-utilisateur/BulkyBookWeb.git
+   git clone https://github.com/your-username/BulkyBookWeb.git
    cd BulkyBookWeb
    ```
 
-2. Configurez la base de données :
-   - Assurez-vous que Microsoft SQL Server est en cours d'exécution.
-   - Modifiez la chaîne de connexion dans `appsettings.json` avec les informations de votre base de données.
+2. Configure the database:
+   - Ensure Microsoft SQL Server is running.
+   - Update the connection string in `appsettings.json` with your database information.
 
-3. Appliquez les migrations pour initialiser la base de données :
+3. Apply migrations to initialize the database:
    ```bash
    dotnet ef database update
    ```
 
-4. Installez les dépendances Angular :
+4. Install Angular dependencies:
    ```bash
    cd ClientApp
    npm install
    ```
 
-5. Lancez l'application :
+5. Run the application:
    ```bash
    cd ../
    dotnet run
    ```
 
-6. Ouvrez votre navigateur à l'adresse suivante : [http://localhost:5000](http://localhost:5000).
+6. Open your browser at: [http://localhost:5000](http://localhost:5000).
 
-## Structure du projet
+## Project Overview
 
-- **ClientApp/** : Frontend Angular pour la partie client.
-- **Controllers/** : Contrôleurs API REST.
-- **Models/** : Modèles de données.
-- **Data/** : Contexte et migrations de la base de données.
-- **Views/** : Vues Razor pour le backend administrateur.
+Here are some screenshots to give you an overview of the project:
+
+![Admin Dashboard](path-to-admin-dashboard-image)
+*Admin interface for managing books.*
+
+![Book List](path-to-book-list-image)
+*Customer interface for browsing books.*
 
 ## Contribution
 
-Les contributions sont les bienvenues ! Suivez ces étapes :
+Contributions are welcome! Follow these steps:
 
-1. Forkez le repository.
-2. Créez une nouvelle branche :
+1. Fork the repository.
+2. Create a new branch:
    ```bash
-   git checkout -b feature/ma-nouvelle-fonctionnalite
+   git checkout -b feature/my-new-feature
    ```
-3. Faites vos modifications et validez-les :
+3. Make your changes and commit them:
    ```bash
-   git commit -m "Ajout d'une nouvelle fonctionnalité"
+   git commit -m "Add a new feature"
    ```
-4. Poussez vos modifications :
+4. Push your changes:
    ```bash
-   git push origin feature/ma-nouvelle-fonctionnalite
+   git push origin feature/my-new-feature
    ```
-5. Ouvrez une Pull Request.
+5. Open a Pull Request.
 
-## Auteur
+## Author
 
 - **Omar Seck**
 
-## Licence
+## License
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
