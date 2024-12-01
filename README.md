@@ -22,7 +22,6 @@ BulkyBookWeb is a web application for book management, featuring an admin interf
   - Entity Framework (EF)
   - LINQ
 - **Frontend**:
-  - Angular
   - JavaScript
   - HTML & CSS
   - Bootstrap
