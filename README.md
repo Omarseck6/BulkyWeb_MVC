@@ -75,11 +75,11 @@ BulkyBookWeb is a web application for book management, featuring an admin interf
 
 Here are some screenshots to give you an overview of the project:
 
-![Admin Dashboard](path-to-admin-dashboard-image)
-*Admin interface for managing books.*
+![Aperçu du formulaire de contact](./screenshot3.png)
 
-![Book List](path-to-book-list-image)
-*Customer interface for browsing books.*
+![Aperçu du formulaire de contact](./screenshot1.png)
+
+![Aperçu du formulaire de contact](./screenshot2.png)
 
 ## Contribution
 
