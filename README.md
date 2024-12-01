@@ -17,7 +17,7 @@ BulkyBookWeb is a web application for book management, featuring an admin interf
 ## Technologies Used
 
 - **Backend**:
-  - .NET Core
+  - .NET Core MVC
   - C#
   - Entity Framework (EF)
   - LINQ
